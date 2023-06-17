@@ -49,7 +49,7 @@ app.listen(() => console.log(`Listening on port 3000.`));
 // });
 
 router.get('/matches', controller.getMatches, (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, 'PATH TO ALL MATCHES'))
+  return res.status(200).json(res.locals.matches)
 });
 
 // router.post('/matches', MIDDLEWARE (req, res) => {
