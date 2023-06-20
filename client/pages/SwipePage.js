@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Card from "../components/Card.js";
+import SwipeCard from "../components/SwipeCard.js";
 
 export default function SwipePage() {
   const [dog, setDog] = useState();
@@ -23,7 +23,7 @@ export default function SwipePage() {
   return (
     <div>
       <h3>Swipe Page</h3>
-      <Card dogInf={dog[i]} />
+      <SwipeCard dogInf={dog[i]} />
     </div>
   );
 }
