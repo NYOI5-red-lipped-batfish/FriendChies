@@ -6,4 +6,9 @@ router.post('/signup', userController.createUser, (req, res) => {
     res.status(200).send(res.locals.user);
 })
 
+//intended route for login checl
+router.post('/login', userController.loginUser, (req, res) => {
+    res.status(200).send(res.locals.loginMsg);
+})
+
 module.exports = router;
