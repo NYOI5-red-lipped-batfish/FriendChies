@@ -1,12 +1,10 @@
 require('dotenv').config();
 const { Pool } = require('pg');
-
-const PG_URI =
-  'postgres://vkeoxonk:8Xl2woJU5E_2fwsUSuf5eexDtoltWESD@drona.db.elephantsql.com/vkeoxonk';
+const connectionString = process.env.CONNECTION_STRING;
 
 // create a new pool here using the connection string above
 const pool = new Pool({
-  connectionString: PG_URI,
+  connectionString,
 });
 
 module.exports = {
@@ -16,6 +14,4 @@ module.exports = {
   },
 };
 
-
 //creating SQL tables
-
