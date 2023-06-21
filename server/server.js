@@ -13,6 +13,7 @@ app.use(express.urlencoded());
 app.use('/build', express.static(path.join(__dirname, '../build')));
 app.use('/', express.static(path.join(__dirname, '../client/')));
 
+// route to userRouter for creation/login check
 app.use('/api/user', userRouter);
 
 // Add this line to include the router

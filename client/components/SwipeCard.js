@@ -36,37 +36,37 @@ export default function Card(props) {
       <h3>{dogInf.name}</h3>
       {/* Carousel to swipe through pictures? */}
       {/* <img className="swipeCardIm" src={link} /> */}
-      <ul class="removeBullets">
+      <ul className="removeBullets">
         <li>
-          <label class="cardLabel" id="owner">
+          <label className="cardLabel" id="owner">
             <strong>Owner Name:</strong>
             {dogInf.owner}
           </label>
         </li>
 
         <li>
-          <label class="cardLabel" id="breed">
+          <label className="cardLabel" id="breed">
             <strong>Breed:</strong>
             {dogInf.breed}
           </label>
         </li>
 
         <li>
-          <label class="cardLabel" id="size">
+          <label className="cardLabel" id="size">
             <strong>Size:</strong>
             {dogInf.size}
           </label>
         </li>
 
         <li>
-          <label class="cardLabel" id="breed">
+          <label className="cardLabel" id="breed">
             <strong>Gender:</strong>
             {dogInf.gender}
           </label>
         </li>
 
         <li>
-          <label class="cardLabel" id="breed">
+          <label className="cardLabel" id="breed">
             <strong>age:</strong>
             {dogInf.age}
           </label>
@@ -74,11 +74,11 @@ export default function Card(props) {
       </ul>
 
       {/* Like Button */}
-      <button class="buttonCard" id="dislike" onClick={handledisLike}>
+      <button className="buttonCard" id="dislike" onClick={handledisLike}>
         No Paw
       </button>
       {/* Dislike Button */}
-      <button class="buttonCard" id="like" onClick={handleLike}>
+      <button className="buttonCard" id="like" onClick={handleLike}>
         Paw
       </button>
     </div>
