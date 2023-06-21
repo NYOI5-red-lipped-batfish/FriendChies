@@ -26,10 +26,10 @@ userController.createUser = async (req, res, next) => {
 userController.loginUser = async (req, res, next) =>{
   console.log(req.body)
   try{
+
+    //get pw to compare to from input username
     const { username, password} = req.body;
-    // const userQuery = `SELECT * FROM login WHERE username = ${username}`
-    // const user = await db.query(userQuery)
-    const pwQuery = `select password from login Where username= '${username}'`
+    const pwQuery = `SELECT password FROM login WHERE username= '${username}'`
     const pw = await db.query(pwQuery)
    
     //compare the password with its hashed version
@@ -38,7 +38,7 @@ userController.loginUser = async (req, res, next) =>{
       if(err){
         return next({log: 'Error in bcrypt loginUser'})
       }
-      else if(result ==true){
+      else if(result == true){
         console.log('pw is right')
         res.locals.loginMsg = 'Successful login'
         console.log(res.locals.loginMsg)
