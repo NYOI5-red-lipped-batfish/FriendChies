@@ -7,6 +7,7 @@ import MatchCard from '../components/MatchCard.js';
 
 export default function MatchPage() {
   const [dogs, setDogs] = useState([]);
+  
   useEffect(() => {
     const fetchDogs = async () => {
       try {
@@ -35,6 +36,7 @@ export default function MatchPage() {
           gender={doggos.gender}
           owner={doggos.owner}
           calendarLink={doggos.calendarLink}
+          // should zip be passed as props to reflect below dummy data? C
         />
       ))}
     </div>

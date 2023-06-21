@@ -27,8 +27,9 @@ controller.getMatches,
 });
 
 router.get('/dogs', controller.getPotentialMatches, (req, res) => {
-return res.status(200).json(res.locals.listOfDogs);
+return res.status(200).json([...res.locals.potentialMatches]);
 });
+// should above be spread..? C
 
 app.get('/*', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
