@@ -36,7 +36,7 @@ controller.getPotentialMatches = async (req, res, next) => {
     const getPotentialMatches = 
     `SELECT * FROM pooches WHERE id NOT IN (SELECT dog_id FROM likes WHERE user_id = ${id}) AND id != ${id}`;
       // excluding the current user's pooch from potential matches
-
+    
     const potentialMatches = await db.query(getPotentialMatches);
     console.log(potentialMatches);
     res.locals.potentialMatches = potentialMatches.rows;
@@ -51,9 +51,9 @@ controller.addToUserLikes = async (req, res, next) => {
   try {
     //not sure if this works...
     const updateLikes =
-      'INSERT INTO likes (user_id, dog_id, liked) VALUES (${user_id}, {$dog_id}, true)';
+      'INSERT INTO likes (user_id, dog_id, liked) VALUES (${user_id}, {$dog_id}, ${state} )';
     const listOfLikes = await db.query(updateLikes);
-    res.locals.updateLikes = updateLikes.rows;
+    res.locals.listOfLikes = listOfLikes.rows;
     console.log(res.locals.updateLikes);
     return next();
   } catch (err) {
@@ -61,7 +61,18 @@ controller.addToUserLikes = async (req, res, next) => {
   }
 };
 
-controller.checkForMatch = async (req, res, next) => {};
+controller.checkForMatch = async (req, res, next) => {
+  try {
+    const checkMatches =
+      'SELECT DISTINCT U.* FROM pooches AS U LEFT JOIN Likes AS L on L.dog_id = U.id WHERE L.liked = true AND L.dog_id = U.id';
+    const Matches = await db.query(checkMatches);
+    res.locals.matches = matches.row;
+    console.log(res.locals.matches);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+};
 
 controller.updateMatch = async (req, res, next) => {};
 
