@@ -32,6 +32,16 @@ export default function SwipePage() {
 
   // you can't check state within the function you set it because it's asynchronous 
   console.log("state dogs:", swipeDogs);
+
+  if (i >= swipeDogs.length && i > 0) {
+    return (
+      <div>
+        <h3>Sorry, there's no more dawgs</h3>
+      </div>
+    )
+  }
+
+  else {
   return (
     <div>
       <h3>Swipe Page</h3>
@@ -39,5 +49,6 @@ export default function SwipePage() {
       <SwipeCard dogArray={swipeDogs} index={i} changeSwipeDog={changeSwipeDog} />
     </div>
   );
+}
 }
 

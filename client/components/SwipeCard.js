@@ -18,7 +18,7 @@ export default function SwipeCard(props) {
   }
 
   // dislike function
-  function handleDislike() {
+  function handleDislike(){
 
     // invoke function which changes dog to next dog C
     changeSwipeDog();
