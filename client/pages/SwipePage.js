@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import SwipeCard from "../components/SwipeCard.js";
 
 export default function SwipePage() {
-  const [dog, setDog] = useState();
+  const [dog, setDog] = useState([]);
   const [i, setI] = useState(0);
 
   useEffect(() => {

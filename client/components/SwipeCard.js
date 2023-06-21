@@ -1,7 +1,7 @@
 import React from "react";
 export default function Card(props) {
   const { dogInf } = props;
-
+//set state to the boolean and the like button would set it to true and the dislike will set the stage to false;
   // like function
   function handleLike() {
     const data = { id: id, userId: userId };
