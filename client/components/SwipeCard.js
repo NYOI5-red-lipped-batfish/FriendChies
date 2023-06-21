@@ -1,87 +1,82 @@
 import React from "react";
 
-export default function Card(props) {
-  const { dogInf } = props;
+export default function SwipeCard(props) {
+  // individual fog and changeSwipeDog function passed down as props C 
+  const { dogArray, index, changeSwipeDog } = props;
+
+  console.log("current index:", index)
+  console.log("hello:", dogArray[index])
+
+  const dogInf = dogArray[index];
+  console.log("single dog:", dogInf)
 
   // like function
   function handleLike() {
-    const data = { 
-      id, 
-      userId 
-    };
-    //send a post request to back end
-    //fetch ('someURL', method:Post)
-    fetch("URL", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: json.stringify(data),
-    })
-      .then((data) => {data.json();})
-      .then((response) => {console.log(data);})
-      .catch((err) => {
-        next({ err: { message: "match request unsuccessful " } });
-      });
-    //Invoke the parent function to update state of current dog
-    handleChangeDog();
+   
+    // invoke function which changes dog to next dog C
+    changeSwipeDog();
   }
 
   // dislike function
   function handleDislike() {
 
-    
-
-
-    //invoke the parent function to update
-    handleChangeDog();
+    // invoke function which changes dog to next dog C
+    changeSwipeDog();
   }
 
   return (
     <div className="card">
-      <h3>{dogInf.name}</h3>
+      <h3>{dogInf?.name}</h3>
       {/* Carousel to swipe through pictures? */}
       {/* <img className="swipeCardIm" src={link} /> */}
       <ul className="removeBullets">
         <li>
-          <label className="cardLabel" id="owner">
-            <strong>Owner Name:</strong>
-            {dogInf.owner}
+          <label className="cardLabel" id="breed">
+            <strong>Breed:</strong>
+            {dogInf?.breed}
           </label>
         </li>
 
         <li>
-          <label className="cardLabel" id="breed">
-            <strong>Breed:</strong>
-            {dogInf.breed}
+          <label className="cardLabel" id="age">
+            <strong>Age:</strong>
+            {dogInf?.age}
           </label>
         </li>
 
         <li>
           <label className="cardLabel" id="size">
             <strong>Size:</strong>
-            {dogInf.size}
+            {dogInf?.size}
           </label>
         </li>
-
+        
         <li>
           <label className="cardLabel" id="breed">
             <strong>Gender:</strong>
-            {dogInf.gender}
+            {dogInf?.gender}
           </label>
         </li>
 
         <li>
-          <label className="cardLabel" id="breed">
-            <strong>age:</strong>
-            {dogInf.age}
+          <label className="cardLabel" id="owner">
+            <strong>Owner:</strong>
+            {dogInf?.owner}
+          </label>
+        </li>
+
+        <li>
+          <label className="cardLabel" id="zip">
+            <strong>Zip:</strong>
+            {dogInf?.zip}
           </label>
         </li>
       </ul>
 
-      {/* Like Button */}
       <button className="buttonCard" id="dislike" onClick={handleDislike}>
         No Paw
       </button>
-      {/* Dislike Button */}
+ 
       <button className="buttonCard" id="like" onClick={handleLike}>
         Paw
       </button>
