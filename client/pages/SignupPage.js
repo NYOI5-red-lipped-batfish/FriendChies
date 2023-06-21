@@ -7,6 +7,7 @@ export default function SignupPage() {
 
     async function signup() {
         console.log(userVal)
+        //May be able to import app from server to use instead of axious
         const response = await axios.post('/api/user/signup', {
             username: userVal,
             password: passVal

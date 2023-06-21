@@ -6,17 +6,21 @@ const userController = {};
 userController.createUser = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-
+    // console.log(username, password)
     //check that username is unique
     const userQuery = `SELECT username FROM login WHERE username= '${username}'` 
     const user = await db.query(userQuery)
-    if(user){
+    // console.log(user.rows, user.rows.length)
+
+    if(user.rows.length !== 0){
+      // console.log(username,user.rows[0].username )
       return next({
         log : 'Username taken',
-        message: {err: 'Username taken'}})
+        message: {err: 'Username taken'}
+      })
     }
     
-
+    // console.log('past unique user check')
     //Add pw hashing here
     const salt = await bcrypt.genSalt()
     const hashedPw = await bcrypt.hash(password, salt)
@@ -26,10 +30,13 @@ userController.createUser = async (req, res, next) => {
     VALUES ($1, $2)`;
     const response = await db.query(createUserSQL, [username, hashedPw]);
 
-    res.locals.user = response;
+    res.locals.msg = 'User Created';
     return next();
   } catch (err) {
-    return next(err);
+    return next({
+      log : 'createUser middleware error',
+      message: {err: 'createUser middleware error'}
+    });
   }
 };
 
