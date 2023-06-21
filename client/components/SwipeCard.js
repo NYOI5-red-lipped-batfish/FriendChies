@@ -1,10 +1,14 @@
 import React from "react";
+
 export default function Card(props) {
   const { dogInf } = props;
 
   // like function
   function handleLike() {
-    const data = { id: id, userId: userId };
+    const data = { 
+      id, 
+      userId 
+    };
     //send a post request to back end
     //fetch ('someURL', method:Post)
     fetch("URL", {
@@ -12,12 +16,8 @@ export default function Card(props) {
       headers: { "Content-Type": "application/json" },
       body: json.stringify(data),
     })
-      .then((data) => {
-        data.json();
-      })
-      .then((response) => {
-        console.log(data);
-      })
+      .then((data) => {data.json();})
+      .then((response) => {console.log(data);})
       .catch((err) => {
         next({ err: { message: "match request unsuccessful " } });
       });
@@ -27,6 +27,10 @@ export default function Card(props) {
 
   // dislike function
   function handleDislike() {
+
+    
+
+
     //invoke the parent function to update
     handleChangeDog();
   }
@@ -74,7 +78,7 @@ export default function Card(props) {
       </ul>
 
       {/* Like Button */}
-      <button className="buttonCard" id="dislike" onClick={handledisLike}>
+      <button className="buttonCard" id="dislike" onClick={handleDislike}>
         No Paw
       </button>
       {/* Dislike Button */}

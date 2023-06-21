@@ -1,29 +1,37 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
+import { useState, useEffect } from "react";
 import SwipeCard from "../components/SwipeCard.js";
 
 export default function SwipePage() {
-  const [dog, setDog] = useState();
+  const [swipeDogs, setSwipeDogs] = useState();
   const [i, setI] = useState(0);
 
-  useEffect(() => {
-    fetch("URL", {
-      method: "GET",
-    })
-      .then((data) => {
-        data.json();
-      })
-      .then(setDog(data));
-  }, []);
-
-  function handleChangeDog() {
-    setI(i + 1);
+  // move through the array of dogs C
+  const changeSwipeDog = () => {
+    setI(i + 1)
   }
+
+  useEffect(() => {
+    const fetchSwipeDogs = async () => {
+      try {
+        const waitSwipeDogs = await fetch('http://localhost:3000/api/dogs');
+        const usableSwipeDogs = await waitSwipeDogs.json(); 
+        console.log('Swipe dogs array:', usableSwipeDogs)
+        setSwipeDogs(usableSwipeDogs);
+      }
+      catch (err) {
+        console.log('There was an error fetching data:', err)
+      }
+    };
+    fetchSwipeDogs()
+  }, []);
 
   return (
     <div>
       <h3>Swipe Page</h3>
-      <SwipeCard dogInf={dog[i]} />
+      {/* prop drill an individual dog, and method to change the index C */}
+      <SwipeCard dogInf={swipeDogs[i]} changeSwipeDog={changeSwipeDog} />
     </div>
   );
 }
+

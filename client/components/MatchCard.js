@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 export default function MatchCard(props) {
   // make an array of dummy data objects
   // loop through the array of objects and get data from each individual object
-  const { name, owner, breed, size, gender, age, calendarLink } = props;
+  const { name, breed, size, age, gender, owner, calendarLink } = props;
 
   // send calendar invite function - assign to the click property of the functions
   function sendInvite() {
