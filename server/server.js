@@ -20,13 +20,16 @@ app.use('/api/user', userRouter);
 app.use('/api', router);
 
 // serve index.html
-router.get('/matches', controller.getMatches, (req, res) => {
+router.get('/matches', 
+controller.getMatches, 
+(req, res) => {
   return res.status(200).json(res.locals.matches);
 });
 
 router.get('/dogs', controller.getPotentialMatches, (req, res) => {
-    return res.status(200).json(res.locals.potentialMatches);
+return res.status(200).json([...res.locals.potentialMatches]);
 });
+// should above be spread..? C
 
 app.get('/*', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
@@ -46,3 +49,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => console.log(`Listening on port 3000.`));
+
+

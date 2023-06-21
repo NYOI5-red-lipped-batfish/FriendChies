@@ -3,7 +3,7 @@ const userController = require('../userController');
 const router = express.Router();
 
 router.post('/signup', userController.createUser, (req, res) => {
-    res.status(201).send("user created");
+    res.status(200).send(res.locals.response);
 })
 
 //intended route for login checl

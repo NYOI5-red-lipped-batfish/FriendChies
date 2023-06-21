@@ -6,32 +6,50 @@ const userController = {};
 userController.createUser = async (req, res, next) => {
   try {
     const { username, password } = req.body;
+    // console.log(username, password)
+    //check that username is unique
+    const userQuery = `SELECT username FROM login WHERE username= '${username}'` 
+    const user = await db.query(userQuery)
+    // console.log(user.rows, user.rows.length)
+
+    if(user.rows.length !== 0){
+      // console.log(username,user.rows[0].username )
+      return next({
+        log : 'Username taken',
+        message: {err: 'Username taken'}
+      })
+    }
     
+    // console.log('past unique user check')
     //Add pw hashing here
     const salt = await bcrypt.genSalt()
     const hashedPw = await bcrypt.hash(password, salt)
 
+    // Inserts new user into login table
     const createUserSQL = `INSERT INTO login (username, password)
     VALUES ($1, $2)`;
-
     const response = await db.query(createUserSQL, [username, hashedPw]);
 
-    res.locals.user = response;
+    res.locals.msg = 'User Created';
     return next();
   } catch (err) {
-    return next(err);
+    return next({
+      log : 'createUser middleware error',
+      message: {err: 'createUser middleware error'}
+    });
   }
 };
 
 userController.loginUser = async (req, res, next) =>{
   console.log(req.body)
   try{
+    const { username, password} = req.body;
 
     //get pw to compare to from input username
-    const { username, password} = req.body;
     const pwQuery = `SELECT password FROM login WHERE username= '${username}'`
     const pw = await db.query(pwQuery)
    
+    
     //compare the password with its hashed version
     console.log(pw.rows[0].password)
     bcrypt.compare(`${password}`,`${pw.rows[0].password}`, function(err,result){

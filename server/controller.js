@@ -16,7 +16,7 @@ controller.getAllDogs = async (req, res, next) => {
 
 controller.getMatches = async (req, res, next) => {
   try {
-    const id = 1;
+    const id = 2;
     const getMatches =
       'SELECT p.id, p.name, p.owner, p.zip, p.breed, p.size, p.age, p.gender FROM pooches p RIGHT OUTER JOIN matches ON matches.matched_user = p.id WHERE matches.login_user = 1';
     const listOfMatches = await db.query(getMatches);
@@ -30,21 +30,13 @@ controller.getMatches = async (req, res, next) => {
 
 controller.getPotentialMatches = async (req, res, next) => {
   try {
-    const id = req.user.id; // assuming req.user contains the logged-in user's info
-
-    // This SQL query returns pooches that the current user has not viewed yet.
-    const getPotentialMatches = `
-      SELECT * 
-      FROM pooches 
-      WHERE id NOT IN (
-        SELECT dog_id 
-        FROM likes 
-        WHERE user_id = ${id}
-      )
-      AND id != ${id}; 
-      
-    `;
-    // exscluding the current user's pooch from potential matche
+    const id = 2;
+    // should be req.user.id contains the logged-in user's info
+    // setting id for 2 is for testing purposes 
+    const getPotentialMatches = 
+    `SELECT * FROM pooches WHERE id NOT IN (SELECT dog_id FROM likes WHERE user_id = ${id}) AND id != ${id}`;
+      // excluding the current user's pooch from potential matches
+    
     const potentialMatches = await db.query(getPotentialMatches);
     console.log(potentialMatches);
     res.locals.potentialMatches = potentialMatches.rows;
