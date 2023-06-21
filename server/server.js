@@ -20,11 +20,15 @@ app.use('/api/user', userRouter);
 app.use('/api', router);
 
 // serve index.html
-router.get('/matches', controller.getMatches, (req, res) => {
+router.get('/matches', 
+controller.getMatches, 
+(req, res) => {
   return res.status(200).json(res.locals.matches);
 });
 
-router.get('/dogs', controller.getAllDogs, (req, res) => {
+router.get('/dogs', 
+controller.getAllDogs, 
+(req, res) => {
     return res.status(200).json(res.locals.listOfDogs);
 });
 
