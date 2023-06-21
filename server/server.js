@@ -24,7 +24,7 @@ router.get('/matches', controller.getMatches, (req, res) => {
   return res.status(200).json(res.locals.matches);
 });
 
-router.get('/dogs', controller.getAllDogs, (req, res) => {
+router.get('/dogs', controller.getPotentialMatches, (req, res) => {
     return res.status(200).json(res.locals.listOfDogs);
 });
 

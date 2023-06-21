@@ -54,7 +54,19 @@ controller.getPotentialMatches = async (req, res, next) => {
   }
 };
 
-controller.addToUserLikes = async (req, res, next) => {};
+controller.addToUserLikes = async (req, res, next) => {
+  try {
+    //not sure if this works...
+    const updateLikes =
+      'INSERT INTO likes (user_id, dog_id, liked) VALUES (${user_id}, {$dog_id}, true)';
+    const listOfLikes = await db.query(updateLikes);
+    res.locals.updateLikes = updateLikes.rows;
+    console.log(res.locals.updateLikes);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+};
 
 controller.checkForMatch = async (req, res, next) => {};
 
