@@ -20,20 +20,19 @@ app.use('/api/user', userRouter);
 app.use('/api', router);
 
 // serve index.html
-router.get('/matches', controller.getMatches, (req, res) => {
+router.get('/matches', 
+controller.getMatches, 
+(req, res) => {
   return res.status(200).json(res.locals.matches);
 });
 
 router.get('/dogs', controller.getPotentialMatches, (req, res) => {
-    return res.status(200).json(res.locals.listOfDogs);
+return res.status(200).json(res.locals.listOfDogs);
 });
 
 app.get('/*', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
-
-
-
 
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
 
